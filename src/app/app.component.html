@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 </head>
 <body>
-<img src="https://www.restaurant-chateau-brest.fr/template/images/graphisme_site/img_header/header_bg.png" id="baniere">
-<img src="https://www.restaurant-chateau-brest.fr/template/images/graphisme_site/img_header/header_logo.png">
-<mat-horizontal-stepper [linear]="isLinear" #stepper>
+<mat-horizontal-stepper class="stepper"[linear]="isLinear" #stepper>
   <mat-step [stepControl]="firstFormGroup">
     <form class="form-group"[formGroup]="firstFormGroup">
+      <h1>Question 1:</h1><br>
+      <div class="smiley_box">
+      <img class="smiley" [src]="this.nonSatisfait[0]" (click)="satisfation(0,0)" >
 
-      <input type="image" [src]="this.nonSatisfait[1]" (click)="satisfation(1,1)">
+      <img class="smiley"[src]="this.tresmoyen[0]"(click)="satisfation(1,0)">
 
-      <input type="image" [src]="this.tresmoyen1"(click)="satisfation(2,1)">
+      <img class="smiley"[src]="this.moyen[0]"(click)="satisfation(2,0)">
 
-      <input type="image" [src]="this.moyen1"(click)="satisfation(3,1)">
+      <img class="smiley"[src]="this.satisfait[0]" (click)="satisfation(3,0)">
 
-      <input type="image" [src]="this.satisfait1"(click)="satisfation(4,1)">
-
-      <input type="image" [src]="this.tresSatisfait1"(click)="satisfation(5,1)">
-
+      <img class="smiley"[src]="this.tresSatisfait[0]"(click)="satisfation(4,0)">
+      </div>
 
 
 
@@ -27,10 +25,11 @@
 
 
 
-      <div>
-        <button mat-button matStepperNext>Next</button>
-      </div>
+
     </form>
+    <div >
+      <button class="btn btn-danger suivant" mat-button matStepperNext>Next</button>
+    </div>
   </mat-step>
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
@@ -52,22 +51,19 @@
         </li>
       </ul>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button class="btn btn-danger" mat-button matStepperPrevious >Back</button>
+
+        <button class="btn btn-danger suivant" mat-button matStepperNext (click)="envoyer()">Next</button>
       </div>
     </form>
   </mat-step>
   <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    You are now done.
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-    </div>
+    <ng-template matStepLabel>Merci !</ng-template>
+
+
   </mat-step>
 </mat-horizontal-stepper>
 
-<button type="button" class="btn btn-primary">Primary</button>
 
 </body>
 </html>

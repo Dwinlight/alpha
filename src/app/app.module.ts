@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import {MatCardModule, MatFormFieldModule, MatInputModule, MatRadioModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BsDropdownModule, ModalModule, TooltipModule} from 'ngx-bootstrap';
-
+import { RouterModule, Routes } from '@angular/router';
 @NgModule({
   declarations: [
     AppComponent
@@ -24,7 +24,8 @@ import {BsDropdownModule, ModalModule, TooltipModule} from 'ngx-bootstrap';
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    MatCardModule
+    MatCardModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
