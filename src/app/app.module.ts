@@ -1,16 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {MatStepperModule} from '@angular/material/stepper';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {MatCardModule, MatFormFieldModule, MatInputModule, MatRadioModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BsDropdownModule, ModalModule, TooltipModule} from 'ngx-bootstrap';
 import { RouterModule, Routes } from '@angular/router';
+import {RetourDTO} from "./DTOs/RetourDTO";
+import { AccueilComponent } from './accueil/accueil.component';
+const appRoutes: Routes = [
+  { path: '', component: AccueilComponent }
+];
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AccueilComponent
   ],
   imports: [
     BsDropdownModule.forRoot(),
@@ -25,9 +31,10 @@ import { RouterModule, Routes } from '@angular/router';
     ReactiveFormsModule,
     AppRoutingModule,
     MatCardModule,
-    RouterModule
+    RouterModule.forRoot(appRoutes),
+    FormsModule
   ],
-  providers: [],
+  providers: [RetourDTO],
   bootstrap: [AppComponent]
 })
 

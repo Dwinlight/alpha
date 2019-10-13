@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<div class="content">
+  <div>
+
+  </div>
+
+
+
+  <mat-horizontal-stepper class="stepper"[linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form class="form-group"[formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Votre avis</ng-template>
+        <h1>Question 1:</h1><br>
+        <div class="smiley_box">
+          <img class="smiley" [src]="this.nonSatisfait[0]" (click)="satisfation(0,0)" >
+
+          <img class="smiley"[src]="this.tresmoyen[0]"(click)="satisfation(1,0)">
+
+          <img class="smiley"[src]="this.moyen[0]"(click)="satisfation(2,0)">
+
+          <img class="smiley"[src]="this.satisfait[0]" (click)="satisfation(3,0)">
+
+          <img class="smiley"[src]="this.tresSatisfait[0]"(click)="satisfation(4,0)">
+
+        </div>
+
+
+
+
+
+
+      </form>
+      <div >
+        <button class="btn btn-danger suivant" mat-button matStepperNext>Suivant</button>
+      </div>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form (ngSubmit)="envoyer(f)" #f="ngForm" id="secondFormGroup">
+        <ng-template matStepLabel>Vos coordonnées</ng-template>
+        <ul style="list-style-type:none;">
+
+          <li>
+            <mat-form-field>
+              <label for="name">Nom, prénom : (optionnel)</label>
+              <input matInput class="form-control" autocomplete="off" id="name" name="name" ngModel>
+
+            </mat-form-field>
+          </li>
+          <li>
+            <mat-form-field>
+              <label for="mail">E-mail : (optionnel)</label>
+              <input matInput class="form-control"  id="mail" autocomplete="off" name="mail" ngModel>
+            </mat-form-field>
+          </li>
+        </ul>
+        <div>
+          <button class="btn btn-danger" mat-button matStepperPrevious >Back</button>
+
+          <button class="btn btn-danger suivant" mat-button matStepperNext (click)="envoyer()">Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Merci !</ng-template>
+      <h1 class="center-block">Le restaurant Aux Tours du
+        Château et toute son équipe vous
+        remercie pour vos retours et
+        espèrent vous revoir bientôt </h1>
+
+
+    </mat-step>
+  </mat-horizontal-stepper>
+
+</div>
+</body>
+</html>
+
+
+
+
