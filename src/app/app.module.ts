@@ -10,13 +10,16 @@ import {BsDropdownModule, ModalModule, TooltipModule} from 'ngx-bootstrap';
 import { RouterModule, Routes } from '@angular/router';
 import {RetourDTO} from "./DTOs/RetourDTO";
 import { AccueilComponent } from './accueil/accueil.component';
+import { GestionComponent } from './gestion/gestion.component';
 const appRoutes: Routes = [
-  { path: '', component: AccueilComponent }
+  { path: '', component: AccueilComponent },
+  { path: 'auth', component: GestionComponent}
 ];
 @NgModule({
   declarations: [
     AppComponent,
-    AccueilComponent
+    AccueilComponent,
+    GestionComponent
   ],
   imports: [
     BsDropdownModule.forRoot(),

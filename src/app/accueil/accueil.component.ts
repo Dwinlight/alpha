@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, NgForm, Validators} from "@angular/forms";
-import {RetourDTO} from "../DTOs/RetourDTO";
-import {Router} from "@angular/router";
-import {RetourService} from "../services/retour.service";
+import {FormBuilder, FormGroup, NgForm} from '@angular/forms';
+import {RetourDTO} from '../DTOs/RetourDTO';
+import {RetourService} from '../services/retour.service';
+import {formatDate} from "@angular/common";
 
 @Component({
   selector: 'app-accueil',
@@ -79,27 +79,29 @@ export class AccueilComponent implements OnInit {
         break;
       }
     }
-    console.log(this.question1);
   }
 
   envoyer(form: NgForm) {
-    console.log(form.value.name);
 
     const retour = new RetourDTO();
+    retour.date = formatDate(Date(), 'dd/MM/yyyy' , 'en-US' , '+1');
+    retour.heure = formatDate(Date(), 'hh:mm' , 'en-US' , '+1');
     retour.question1 = '' + this.question1;
     if (form.value.name === '') {
-      retour.name = '<i> Non renseigné</i>';
+      retour.name = 'Non renseigné';
     } else {
       retour.name = form.value.name;
     }
-    if (form.value.name === '') {
-      retour.mail = '<i> Non renseigné</i>';
+    if (form.value.mail === '') {
+      retour.mail = 'Non renseigné';
     } else {
       retour.mail = form.value.mail;
     }
     console.log(retour);
     this.retourService.createNewRetour(retour);
     setTimeout(() => window.location.reload(), 2500);
+
+
   }
 
 
