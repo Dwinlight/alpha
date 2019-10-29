@@ -37,7 +37,14 @@ export class RetourService {
     const t: RetourDTO[] = [];
     this.db.collection('retours').get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
-        t.push(new RetourDTO(doc.id, doc.data().mail, doc.data().name, doc.data().question1, doc.data().date, doc.data().heure))
+        const retour = new RetourDTO();
+        retour.id = doc.id;
+        retour.mail = doc.data().mail;
+        retour.name = doc.data().name;
+        retour.question1 = doc.data().question1;
+        retour.date = doc.data().date;
+        retour.heure = doc.data().heure;
+        t.push(retour);
         // doc.data() is never undefined for query doc snapshots
         // console.log(doc.id, " => ", doc.data().mail);
       });

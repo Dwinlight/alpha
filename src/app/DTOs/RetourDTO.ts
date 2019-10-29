@@ -1,13 +1,13 @@
 export class RetourDTO {
-  constructor(id?: string, mail?: string, name?: string, question1?: string, date?: string, heure?: string) {
-    this.id = id;
-    this.mail = mail;
-    this.name = name;
-    this.question1 = question1;
-    this.date = date;
-    this.heure = heure;
+  constructor() {
+    this.id = '';
+    this.mail = '';
+    this.name = '';
+    this.question1 = '';
+    this.date = '';
+    this.heure = '';
   }
-  id?: string;
+  id: string;
   mail: string;
   name: string;
   question1: string;
