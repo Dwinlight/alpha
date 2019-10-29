@@ -11,15 +11,21 @@ import { RouterModule, Routes } from '@angular/router';
 import {RetourDTO} from "./DTOs/RetourDTO";
 import { AccueilComponent } from './accueil/accueil.component';
 import { GestionComponent } from './gestion/gestion.component';
+import { AuthGuardServiceService} from "./services/auth-guard-service.service";
+import { ConnexionComponent } from './connexion/connexion.component';
+
 const appRoutes: Routes = [
   { path: '', component: AccueilComponent },
-  { path: 'auth', component: GestionComponent}
+  { path: 'login', component: ConnexionComponent},
+  { path: 'auth', component: GestionComponent, canActivate: [AuthGuardServiceService]},
+  { path: '**', redirectTo: '' }
 ];
 @NgModule({
   declarations: [
     AppComponent,
     AccueilComponent,
-    GestionComponent
+    GestionComponent,
+    ConnexionComponent
   ],
   imports: [
     BsDropdownModule.forRoot(),

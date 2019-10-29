@@ -2,24 +2,36 @@ import { Component, OnInit } from '@angular/core';
 import {RetourDTO} from "../DTOs/RetourDTO";
 import {RetourService} from "../services/retour.service";
 import {Router} from "@angular/router";
-
+import {AuthServiceService} from "../services/auth-service.service";
+import * as firebase from "firebase";
 @Component({
   selector: 'app-gestion',
   templateUrl: './gestion.component.html',
   styleUrls: ['./gestion.component.css']
 })
 export class GestionComponent implements OnInit {
+  isAuth: boolean;
   index: number = null;
   retours: RetourDTO[];
-  retoursOrderByDate: RetourDTO[];
-  retoursOrderByMail: RetourDTO[];
-  constructor(private retourService: RetourService ,  private router: Router) {
+  constructor(private authService: AuthServiceService, private retourService: RetourService ,  private router: Router) {
 
   }
 
   ngOnInit() {
     this.retourService.getRetours();
     this.retours = this.retourService.retours;
+    firebase.auth().onAuthStateChanged(
+      (user) => {
+        if (user) {
+          this.isAuth = true;
+        } else {
+          this.isAuth = false;
+        }
+      }
+    );
+  }
+  onSignOut() {
+    this.authService.signOutUser();
   }
 
   onOrderByMail() {
