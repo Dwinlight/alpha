@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, NgForm} from '@angular/forms';
 import {RetourDTO} from '../DTOs/RetourDTO';
 import {RetourService} from '../services/retour.service';
 import {formatDate} from '@angular/common';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-accueil',
@@ -28,13 +29,19 @@ export class AccueilComponent implements OnInit {
   moyen = [this.MOYEN_SELECT, this.MOYEN_SELECT, this.MOYEN_SELECT];
   satisfait = [this.SATISFAIT, this.SATISFAIT, this.SATISFAIT];
   tresSatisfait = [this.TRES_SATISFAIT, this.TRES_SATISFAIT, this.TRES_SATISFAIT];
-  question1 = 0;
-  constructor(private _formBuilder: FormBuilder, private retourService: RetourService) { }
+  question = [0, 0, 0];
+  constructor(private _formBuilder: FormBuilder, private retourService: RetourService, private route: ActivatedRoute, private router: Router) {
+    this.route.queryParams.subscribe(params => {
+      if (params.connexion === 'true') {
+        this.router.navigate(['/login']);
+      }
+    });
+  }
 
   satisfation(i: number, j: number) {
     switch (i) {
       case 0: {
-        this.question1 = -2;
+        this.question[j] = -2;
         this.nonSatisfait[j] = this.NON_STATISFAIT_SELECT;
         this.tresmoyen[j] = this.TRES_MOYEN_SATISFAIT;
         this.moyen[j] = this.MOYEN;
@@ -43,7 +50,7 @@ export class AccueilComponent implements OnInit {
         break;
       }
       case 1: {
-        this.question1 = -1;
+        this.question[j] = -1;
         this.nonSatisfait[j] = this.NON_STATISFAIT;
         this.tresmoyen[j] = this.TRES_MOYEN_SATISFAIT_SELECT;
         this.moyen[j] = this.MOYEN;
@@ -52,7 +59,7 @@ export class AccueilComponent implements OnInit {
         break;
       }
       case 2: {
-        this.question1 = 0;
+        this.question[j] = 0;
         this.nonSatisfait[j] = this.NON_STATISFAIT;
         this.tresmoyen[j] = this.TRES_MOYEN_SATISFAIT;
         this.moyen[j] = this.MOYEN_SELECT;
@@ -61,7 +68,7 @@ export class AccueilComponent implements OnInit {
         break;
       }
       case 3: {
-        this.question1 = 1;
+        this.question[j] = 1;
         this.nonSatisfait[j] = this.NON_STATISFAIT;
         this.tresmoyen[j] = this.TRES_MOYEN_SATISFAIT;
         this.moyen[j] = this.MOYEN;
@@ -70,7 +77,7 @@ export class AccueilComponent implements OnInit {
         break;
       }
       case 4: {
-        this.question1 = 2;
+        this.question[j] = 2;
         this.nonSatisfait[j] = this.NON_STATISFAIT;
         this.tresmoyen[j] = this.TRES_MOYEN_SATISFAIT;
         this.moyen[j] = this.MOYEN;
@@ -86,7 +93,9 @@ export class AccueilComponent implements OnInit {
     const retour = new RetourDTO();
     retour.date = formatDate(Date(), 'dd/MM/yyyy' , 'en-US' , '+1');
     retour.heure = formatDate(Date(), 'hh:mm' , 'en-US' , '+1');
-    retour.question1 = '' + this.question1;
+    retour.question1 = '' + this.question[0];
+    retour.question2 = '' + this.question[1];
+    retour.question3 = '' + this.question[2];
     if (form.value.name === '') {
       retour.name = 'Non renseigné';
     } else {

@@ -42,6 +42,8 @@ export class RetourService {
         retour.mail = doc.data().mail;
         retour.name = doc.data().name;
         retour.question1 = doc.data().question1;
+        retour.question2 = doc.data().question2;
+        retour.question3 = doc.data().question3;
         retour.date = doc.data().date;
         retour.heure = doc.data().heure;
         t.push(retour);
@@ -53,6 +55,8 @@ export class RetourService {
   }
   createNewRetour(newRetour: RetourDTO) {
     this.db.collection("retours").doc(this.makeid(20)).set({
+      question3: newRetour.question3,
+      question2: newRetour.question2,
       question1: newRetour.question1,
       name: newRetour.name,
       mail: newRetour.mail,
