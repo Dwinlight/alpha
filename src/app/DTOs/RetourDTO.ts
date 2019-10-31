@@ -4,6 +4,8 @@ export class RetourDTO {
     this.mail = '';
     this.name = '';
     this.question1 = '';
+    this.question2 = '';
+    this.question3 = '';
     this.date = '';
     this.heure = '';
   }
@@ -11,6 +13,8 @@ export class RetourDTO {
   mail: string;
   name: string;
   question1: string;
+  question2: string;
+  question3: string;
   date: string;
   heure: string;
   compareTo(retour: RetourDTO) {
